@@ -24,9 +24,6 @@ async function manageDaysOfTheWeek (client) {
   const weekday = new Date().getDay()
   const currentDotw = channels[weekday]
 
-  // Set system channel to current DoTW channel
-  await guild.setSystemChannel(currentDotw)
-
   // Move current DoTW channel to the top of the General category
   await currentDotw.setParent(generalCategory)
   await currentDotw.setPosition(0)
