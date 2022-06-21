@@ -2,7 +2,7 @@ name: Fridaypost
 
 on:
   schedule:
-    - cron: "0 7 * * 5"
+    - cron: "0 14 * * 5"
 
 jobs:
   run:
