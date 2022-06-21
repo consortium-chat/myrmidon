@@ -1,0 +1,14 @@
+name: Fridaypost
+
+on:
+  schedule:
+    - cron: "0 7 * * 5"
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    environment: default
+    steps:
+    - uses: actions/checkout@v3
+    - run: npm ci
+    - run: node . friday
