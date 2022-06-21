@@ -1,4 +1,4 @@
-const Discord = require('discord.js')
+const { Client } = require('discord.js')
 
 const CONSORTIUM = '537167820539166720'
 const GENERAL_CATEGORY = '609619276306972714'
@@ -14,7 +14,7 @@ const DOTW_CHANNELS = [
 ]
 
 /**
- * @param {Discord.Client} client
+ * @param {Client} client
  */
 async function manageDaysOfTheWeek (client) {
   const guild = client.guilds.resolve(CONSORTIUM)
