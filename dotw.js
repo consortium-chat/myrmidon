@@ -5,11 +5,7 @@ import {
   GENERAL_CATEGORY,
 } from "./constants.js";
 
-/**
- * @param {Client} client
- */
 export async function manageDaysOfTheWeek(client) {
-  const a = 3;
   const guild = client.guilds.resolve(CONSORTIUM);
   const generalCategory = guild.channels.resolve(GENERAL_CATEGORY);
   const dotwCategory = guild.channels.resolve(DOTW_CATEGORY);
