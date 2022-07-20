@@ -15,7 +15,9 @@ export function postFriday () {
             'content-type': 'application/json'
           },
           body: JSON.stringify({
-            content: 'https://www.youtube.com/watch?v=kfVsfOSbJY0'
+            content: Math.random() > 1/30
+              ? 'https://www.youtube.com/watch?v=kfVsfOSbJY0' // original
+              : 'https://www.youtube.com/watch?v=iCFOcqsnc9Y' // remix
           })
         })
         if (response.ok) {
