@@ -6,6 +6,9 @@ import { Client, Intents } from 'discord.js'
 import { manageDotWChannels } from './dotw.js'
 import { postFriday } from './friday.js'
 
+// Event handlers
+import { autoUnarchivePermanentThreads } from './threads.js'
+
 assert(process.env.DISCORD_TOKEN, 'DISCORD_TOKEN environment variable is not set.')
 
 const client = new Client({ intents: [ Intents.FLAGS.GUILDS ] })
@@ -18,5 +21,8 @@ client.once('ready', async () => {
   manageDotWChannels(client).start()
   postFriday().start()
 })
+
+// Register event handlers
+client.on('threadUpdate', autoUnarchivePermanentThreads)
 
 client.login()
