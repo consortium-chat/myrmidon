@@ -3,7 +3,6 @@ import assert from 'node:assert/strict'
 import { Client, Intents } from 'discord.js'
 
 // Cron jobs
-import { manageDotWChannels } from './dotw.js'
 import { postFriday } from './friday.js'
 
 // Event handlers
@@ -18,7 +17,6 @@ client.once('ready', async () => {
   console.log(`Logged in as ${client.user.tag}.`)
 
   // Start cron jobs
-  manageDotWChannels(client).start()
   postFriday().start()
 })
 
