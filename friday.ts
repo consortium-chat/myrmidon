@@ -1,8 +1,4 @@
-import { assert } from "std/testing/asserts.ts";
-
-/** Friday webhook URL */
-const fridayWebhookURL = Deno.env.get("FRIDAY_WEBHOOK_URL");
-assert(fridayWebhookURL, "FRIDAY_WEBHOOK_URL is not set");
+import { fridayWebhook } from "./config.ts";
 
 interface Video {
   url: string;
@@ -27,7 +23,7 @@ async function fridayPost() {
   const video = postRemix ? remix : original;
 
   // Make request to webhook
-  const response = await fetch(fridayWebhookURL as string, {
+  const response = await fetch(fridayWebhook, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ content: video.url }),
@@ -50,7 +46,7 @@ async function fridayPost() {
  *
  * Per https://mas.consortium.chat/motions/1658
  */
-export function fridayPostCheck() {
+function fridayPostCheck() {
   // Get the current date-time in the Pacific Time
   const nowPT = new Date().toLocaleString("en-US", {
     timeZone: "US/Pacific",
@@ -67,3 +63,6 @@ export function fridayPostCheck() {
     );
   }
 }
+
+setInterval(fridayPostCheck, 1000);
+console.log('Scheduled posting "Friday" every Friday at 7AM Pacific Time');
