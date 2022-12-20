@@ -7,11 +7,20 @@ import {
   startBot,
 } from "discordeno";
 
-import { archiveCategory, guildId, token } from "./config.ts";
+import config from "./config.ts";
+
+Deno.permissions.request({
+  name: "net",
+  host: "discord.com",
+});
+Deno.permissions.request({
+  name: "net",
+  host: "gateway.discord.gg",
+});
 
 /** Myrmidon Discord bot */
 const bot = createBot({
-  token,
+  token: config.token,
   intents: Intents.Guilds | Intents.GuildMessages,
 });
 
@@ -26,7 +35,7 @@ bot.helpers.createGuildApplicationCommand(
     name: "archive",
     description: "Move the current channel to the archive category",
   },
-  guildId,
+  config.guildId,
 );
 
 const commandHandlers = new Map<string, EventHandlers["interactionCreate"]>();
@@ -40,10 +49,10 @@ commandHandlers.set("archive", async (bot, interaction) => {
   const channelPosition: ModifyGuildChannelPositions = {
     id: channelId.toString(),
     position: null,
-    parentId: archiveCategory,
+    parentId: config.archiveCategory,
   };
   const channelTag = `<#${channelId}>`;
-  const response = await bot.helpers.editChannelPositions(guildId, [
+  const response = await bot.helpers.editChannelPositions(config.guildId, [
     channelPosition,
   ])
     .then(() => `Archived ${channelTag}`)

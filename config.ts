@@ -7,14 +7,19 @@ function require(name: string): string {
   return variable;
 }
 
-/** Discord API token */
-export const token = require("DISCORD_TOKEN");
+export default {
+  /** Discord API token */
+  token: require("DISCORD_TOKEN"),
 
-/** Discord guild ID */
-export const guildId = require("GUILD_ID");
+  /** Discord guild ID */
+  guildId: require("GUILD_ID"),
 
-/** Archive channel category */
-export const archiveCategory = require("ARCHIVE_CATEGORY");
+  /** Archive channel category */
+  archiveCategory: require("ARCHIVE_CATEGORY"),
 
-/** Friday webhook URL */
-export const fridayWebhook = require("FRIDAY_WEBHOOK");
+  /** Friday webhook URL */
+  fridayWebhook: require("FRIDAY_WEBHOOK"),
+
+  /** Music webhook URL */
+  musicWebhook: require("MUSIC_WEBHOOK"),
+};

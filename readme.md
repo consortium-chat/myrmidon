@@ -12,10 +12,11 @@ Create a `.env` file in the working directory with the following values:
     GUILD_ID="replace with guild ID"
     ARCHIVE_CATEGORY="replace with archive category ID"
     FRIDAY_WEBHOOK="replace with webhook endpoint"
+    MUSIC_WEBHOOK="replace with webhook endpoint"
 
 Run the following command:
 
-    deno run --allow-read=. --allow-env --allow-net="discord.com,gateway.discord.gg" main.ts
+    deno run main.ts
 
 ## License
 
