@@ -50,6 +50,7 @@ commandHandlers.set("archive", async (bot, interaction) => {
     id: channelId.toString(),
     position: null,
     parentId: config.archiveCategory,
+    lockPositions: true,
   };
   const channelTag = `<#${channelId}>`;
   const response = await bot.helpers.editChannelPositions(config.guildId, [
