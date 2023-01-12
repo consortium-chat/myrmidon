@@ -9,11 +9,10 @@
 
 4. Run `poetry install` to install dependencies.
 
-5. Create a `.env` file in the root directory of the project. Set the `DISCORD_TOKEN`
-   environment variable to your Discord bot token. You can generate a new token in the
-   [Discord Developer Portal].
+5. Copy the `.env-template` file to `.env` and fill in the values. You can generate a
+   new Discord token in the [Discord Developer Portal].
 
-7. Run `poetry run python bot.py` to start the bot.
+6. Run `poetry run python .` to start the bot.
 
 [Python 3.11]: https://www.python.org/downloads
 [Poetry]: https://python-poetry.org
