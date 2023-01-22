@@ -1,17 +1,21 @@
 import logging
 import os
-from typing import Optional
 
 import requests
+from schedule import every, repeat
 
 webhook_url = os.environ["MUSIC_WEBHOOK"]
 
 logger = logging.getLogger("schedule.music")
 
 
-def get_top_song() -> Optional[str]:
-    """Gets the top song from r/listentothis."""
+@repeat(every().saturday.at("08:00"))
+def post_music():
+    """Post this week's top r/listentothis song to Discord."""
 
+    logger.info("Posting top song")
+
+    # Get the top song from r/listentothis
     try:
         response = requests.get(
             "https://www.reddit.com/r/listentothis/top.json?t=week&limit=1",
@@ -26,15 +30,8 @@ def get_top_song() -> Optional[str]:
         logger.error(f"Failed to decode top song response: {exc}")
         return None
 
-    return data.get("data", {}).get("children", [{}])[0].get("data", {}).get("url")
+    music_url = data.get("data", {}).get("children", [{}])[0].get("data", {}).get("url")
 
-
-def post_music():
-    """Post this week's top r/listentothis song to Discord."""
-
-    logger.info("Posting top song")
-
-    music_url = get_top_song()
     if music_url is None:
         logger.error("Failed to get top song")
         return
@@ -48,3 +45,6 @@ def post_music():
 
     except requests.HTTPError as exc:
         logging.error(f"Failed to post top song: {exc}")
+
+
+logger.info("Loaded Song-A-Week event")

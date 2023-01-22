@@ -12,7 +12,10 @@
 5. Copy the `.env-template` file to `.env` and fill in the values. You can generate a
    new Discord token in the [Discord Developer Portal].
 
-6. Run `poetry run python .` to start the bot.
+6. Run `poetry run python bot` to start the bot.
+
+7. In a separate terminal, run `poetry run python events` to start the scheduled events
+   loop.
 
 [Python 3.11]: https://www.python.org/downloads
 [Poetry]: https://python-poetry.org

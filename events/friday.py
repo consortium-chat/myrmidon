@@ -3,6 +3,7 @@ import os
 import random
 
 import requests
+from schedule import every, repeat
 
 webhook_url = os.environ["FRIDAY_WEBHOOK"]
 avatar_url = "https://i.ytimg.com/vi/kfVsfOSbJY0/maxresdefault.jpg"
@@ -10,6 +11,7 @@ avatar_url = "https://i.ytimg.com/vi/kfVsfOSbJY0/maxresdefault.jpg"
 logger = logging.getLogger("schedule.friday")
 
 
+@repeat(every().friday.at("07:00"))
 def post_friday():
     """Post 'Friday' by Rebecca Black to the the configured webhook. Sometimes post the
     official remix instead."""
@@ -34,3 +36,6 @@ def post_friday():
 
     except requests.HTTPError as exc:
         logging.error(f"Failed to post Friday: {exc}")
+
+
+logger.info("Loaded Friday-post event")
