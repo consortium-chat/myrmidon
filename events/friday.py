@@ -7,19 +7,21 @@ import requests
 webhook_url = os.environ["FRIDAY_WEBHOOK"]
 avatar_url = "https://i.ytimg.com/vi/kfVsfOSbJY0/maxresdefault.jpg"
 
+logger = logging.getLogger("schedule.friday")
+
 
 def post_friday():
     """Post 'Friday' by Rebecca Black to the the configured webhook. Sometimes post the
     official remix instead."""
 
-    try:
-        # 1-in-30 chance of posting the official remix
-        video_url = (
-            "https://www.youtube.com/watch?v=iCFOcqsnc9Y"
-            if random.random() < 1 / 30
-            else "https://www.youtube.com/watch?v=kfVsfOSbJY0"
-        )
+    if random.random() < 1 / 30:
+        video_url = "https://www.youtube.com/watch?v=iCFOcqsnc9Y"
+        logger.info("Posting remix")
+    else:
+        video_url = "https://www.youtube.com/watch?v=kfVsfOSbJY0"
+        logger.info("Posting original")
 
+    try:
         response = requests.post(
             webhook_url,
             json={
@@ -30,8 +32,5 @@ def post_friday():
         )
         response.raise_for_status()
 
-        logging.info("Posted Friday")
-
-    except Exception as exc:
-
+    except requests.HTTPError as exc:
         logging.error(f"Failed to post Friday: {exc}")
