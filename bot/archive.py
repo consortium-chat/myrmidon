@@ -9,9 +9,7 @@ logger = logging.getLogger("myrmidon.archive")
 
 
 class ArchiveCommand(discord.Cog):
-    bot: discord.Bot
-
-    def __init__(self, bot):
+    def __init__(self, bot: discord.Bot):
         self.bot = bot
 
     @discord.slash_command(
