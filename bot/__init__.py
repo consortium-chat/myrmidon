@@ -1,12 +1,14 @@
+import logging
 import os
 
-import hikari
+import discord
 
-token = os.environ["DISCORD_TOKEN"]
-intents = hikari.Intents.ALL_UNPRIVILEGED | hikari.Intents.MESSAGE_CONTENT
-bot = hikari.GatewayBot(token, intents=intents)
+logger = logging.getLogger("myrmidon")
+
+intents = discord.Intents.default()
+client = discord.Client(intents=intents)
 
 
-@bot.listen()
-async def shard_ready(event: hikari.ShardReadyEvent):
-    print(f"Logged in as {event.my_user}")
+@client.event
+async def on_ready():
+    logger.info(f"Logged in as {client.user}")
