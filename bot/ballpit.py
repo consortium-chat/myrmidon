@@ -48,4 +48,4 @@ def ballpit_message(length: int) -> str:
     for _ in range(ball_count):
         message += ballpit_item()
         message += " " * random.randint(0, 8)
-    return message
+    return message[0:2000]
